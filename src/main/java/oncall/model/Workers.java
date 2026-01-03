@@ -43,4 +43,9 @@ public record Workers(List<Worker> workers) {
         workers.set(workerIndex, workers.get(nextWorkerIndex));
         workers.set(nextWorkerIndex, worker);
     }
+
+    public boolean isNotSame(Workers holidayWorkers) {
+        return holidayWorkers.workers.stream()
+                .anyMatch(worker -> !this.workers.contains(worker));
+    }
 }

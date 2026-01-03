@@ -1,5 +1,8 @@
 package oncall.model;
 
+import oncall.exception.CustomException;
+import oncall.exception.ExceptionMessage;
+
 public class Oncall {
     private final Workers weekdayWorkers;
     private final Workers holidayWorkers;
@@ -8,6 +11,9 @@ public class Oncall {
     private Worker lastWorker;
 
     public Oncall(Workers weekdayWorkers, Workers holidayWorkers) {
+        if (weekdayWorkers.isNotSame(holidayWorkers)) {
+            throw new CustomException(ExceptionMessage.INVALID_INPUT);
+        }
         this.weekdayWorkers = weekdayWorkers;
         this.holidayWorkers = holidayWorkers;
     }
