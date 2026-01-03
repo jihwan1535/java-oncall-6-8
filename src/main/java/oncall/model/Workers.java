@@ -1,5 +1,6 @@
 package oncall.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import oncall.exception.CustomException;
@@ -17,6 +18,7 @@ public record Workers(List<Worker> workers) {
         if (workers.size() < REQUIRES_MIN_WORKERS || workers.size() > REQUIRES_MAX_WORKERS) {
             throw new CustomException(ExceptionMessage.INVALID_INPUT);
         }
+        workers = new ArrayList<>(workers);
     }
 
     public static Workers fromWorkerNames(List<String> workerNames) {
