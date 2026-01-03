@@ -1,5 +1,6 @@
 package oncall.controller;
 
+import java.util.List;
 import java.util.function.Consumer;
 import oncall.utils.ExceptionHandler;
 import oncall.view.InputView;
@@ -12,6 +13,8 @@ public class OnCallController {
 
     public void run() {
         OnCallDate onCallDate = ExceptionHandler.handle(inputView::readOnCallDate, processError());
+        List<String> weekDayWorkers = inputView.readWeekDayWorkers();
+        List<String> holiDayWorkers = inputView.readHolidayWorkers();
     }
 
     private Consumer<IllegalArgumentException> processError() {
