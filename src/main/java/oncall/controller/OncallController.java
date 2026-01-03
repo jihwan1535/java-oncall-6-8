@@ -2,19 +2,29 @@ package oncall.controller;
 
 import java.util.List;
 import java.util.function.Consumer;
+import oncall.model.Oncall;
+import oncall.model.Workers;
 import oncall.utils.ExceptionHandler;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
-public class OnCallController {
+public class OncallController {
 
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
     public void run() {
         OnCallDate onCallDate = ExceptionHandler.handle(inputView::readOnCallDate, processError());
+        Oncall oncall = ExceptionHandler.handle(this::readOncall, processError());
+    }
+
+    private Oncall readOncall() {
         List<String> weekDayWorkers = inputView.readWeekDayWorkers();
         List<String> holiDayWorkers = inputView.readHolidayWorkers();
+        return new Oncall(
+                Workers.fromWeekDayWorkerNames(weekDayWorkers),
+                Workers.fromHolidayWorkers(holiDayWorkers)
+        );
     }
 
     private Consumer<IllegalArgumentException> processError() {

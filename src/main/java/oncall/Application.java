@@ -1,10 +1,10 @@
 package oncall;
 
-import oncall.controller.OnCallController;
+import oncall.controller.OncallController;
 
 public class Application {
     public static void main(String[] args) {
-        OnCallController controller = new OnCallController();
+        OncallController controller = new OncallController();
         controller.run();
     }
 }
