@@ -25,8 +25,8 @@ public class OncallController {
         List<String> weekDayWorkers = inputView.readWeekDayWorkers();
         List<String> holiDayWorkers = inputView.readHolidayWorkers();
         return new Oncall(
-                Workers.fromWeekDayWorkerNames(weekDayWorkers),
-                Workers.fromHolidayWorkers(holiDayWorkers)
+                Workers.fromWorkerNames(weekDayWorkers),
+                Workers.fromWorkerNames(holiDayWorkers)
         );
     }
 

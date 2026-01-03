@@ -19,16 +19,9 @@ public record Workers(List<Worker> workers) {
         }
     }
 
-    public static Workers fromWeekDayWorkerNames(List<String> weekDayWorkerNames) {
-        List<Worker> workers = weekDayWorkerNames.stream()
-                .map(workerName -> new Worker(workerName, true))
-                .toList();
-        return new Workers(workers);
-    }
-
-    public static Workers fromHolidayWorkers(List<String> weekDayWorkerNames) {
-        List<Worker> workers = weekDayWorkerNames.stream()
-                .map(workerName -> new Worker(workerName, false))
+    public static Workers fromWorkerNames(List<String> workerNames) {
+        List<Worker> workers = workerNames.stream()
+                .map(Worker::new)
                 .toList();
         return new Workers(workers);
     }

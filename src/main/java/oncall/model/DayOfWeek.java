@@ -41,9 +41,13 @@ public enum DayOfWeek {
         return findDayOfWeekBySequence(sequence).dayOfWeek;
     }
 
-    public boolean isWeekDay(int day) {
+    public boolean isWeekday(int day) {
+        return !isWeekend(day);
+    }
+
+    public boolean isWeekend(int day) {
         int sequence = (this.sequence + day - 1) % 7;
         DayOfWeek dayOfWeek = findDayOfWeekBySequence(sequence);
-        return dayOfWeek != SAT && dayOfWeek != SUN;
+        return dayOfWeek == SAT || dayOfWeek == SUN;
     }
 }
