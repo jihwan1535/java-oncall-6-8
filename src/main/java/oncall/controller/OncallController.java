@@ -3,6 +3,7 @@ package oncall.controller;
 import java.util.List;
 import java.util.function.Consumer;
 import oncall.model.Oncall;
+import oncall.model.Schedule;
 import oncall.model.Workers;
 import oncall.utils.ExceptionHandler;
 import oncall.view.InputView;
@@ -16,6 +17,8 @@ public class OncallController {
     public void run() {
         OnCallDate onCallDate = ExceptionHandler.handle(inputView::readOnCallDate, processError());
         Oncall oncall = ExceptionHandler.handle(this::readOncall, processError());
+        Schedule schedule = new Schedule(onCallDate.month(), onCallDate.dayOfWeek(), oncall);
+        outputView.printSchedule(schedule);
     }
 
     private Oncall readOncall() {

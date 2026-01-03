@@ -28,4 +28,13 @@ public enum DayOfWeek {
                 .findFirst()
                 .orElseThrow(() -> new CustomException(ExceptionMessage.INVALID_INPUT));
     }
+
+    public String determineDayOfWeek(int day) {
+        int sequence = (this.sequence + day - 1) % 7;
+        return Arrays.stream(values())
+                .filter(dayOfWeek -> dayOfWeek.sequence == sequence)
+                .findFirst()
+                .orElseThrow(IllegalStateException::new)
+                .dayOfWeek;
+    }
 }

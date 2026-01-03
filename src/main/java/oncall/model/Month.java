@@ -20,11 +20,11 @@ public enum Month {
     DEC("12", 31);
 
     private final String month;
-    private final int day;
+    private final int lastDay;
 
-    Month(String month, int day) {
+    Month(String month, int lastDay) {
         this.month = month;
-        this.day = day;
+        this.lastDay = lastDay;
     }
 
     public static Month from(String month) {
@@ -32,5 +32,13 @@ public enum Month {
                 .filter(value -> value.month.equals(month))
                 .findFirst()
                 .orElseThrow(() -> new CustomException(ExceptionMessage.INVALID_INPUT));
+    }
+
+    public String month() {
+        return month;
+    }
+
+    public int lastDay() {
+        return lastDay;
     }
 }
