@@ -25,4 +25,20 @@ public record Workers(List<Worker> workers) {
                 .toList();
         return new Workers(workers);
     }
+
+    public Worker getNextWorker(Worker prevWorker) {
+        if (prevWorker == null) {
+            return workers.get(0);
+        }
+        int prevWorkerIndex = workers.indexOf(prevWorker);
+        int nextWorkerIndex = (prevWorkerIndex + 1) % workers.size();
+        return workers.get(nextWorkerIndex);
+    }
+
+    public void swapNext(Worker worker) {
+        int workerIndex = workers.indexOf(worker);
+        int nextWorkerIndex = (workerIndex + 1) % workers.size();
+        workers.set(workerIndex, workers.get(nextWorkerIndex));
+        workers.set(nextWorkerIndex, worker);
+    }
 }

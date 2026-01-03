@@ -12,10 +12,24 @@ public class Oncall {
     }
 
     public Worker getNextHolidayWorker() {
-        return null;
+        Worker nextWorker = holidayWorkers.getNextWorker(lastHolidayWorker);
+        if (nextWorker.equals(lastWeekdayWorker)) {
+            holidayWorkers.swapNext(nextWorker);
+            nextWorker = holidayWorkers.getNextWorker(lastHolidayWorker);
+        }
+
+        lastHolidayWorker = nextWorker;
+        return nextWorker;
     }
 
     public Worker getNextWeekdayWorker() {
-        return null;
+        Worker nextWorker = weekdayWorkers.getNextWorker(lastWeekdayWorker);
+        if (nextWorker.equals(lastHolidayWorker)) {
+            weekdayWorkers.swapNext(nextWorker);
+            nextWorker = weekdayWorkers.getNextWorker(lastHolidayWorker);
+        }
+
+        lastWeekdayWorker = nextWorker;
+        return nextWorker;
     }
 }
