@@ -29,12 +29,21 @@ public enum DayOfWeek {
                 .orElseThrow(() -> new CustomException(ExceptionMessage.INVALID_INPUT));
     }
 
-    public String determineDayOfWeek(int day) {
-        int sequence = (this.sequence + day - 1) % 7;
+    private static DayOfWeek findDayOfWeekBySequence(int sequence) {
         return Arrays.stream(values())
                 .filter(dayOfWeek -> dayOfWeek.sequence == sequence)
                 .findFirst()
-                .orElseThrow(IllegalStateException::new)
-                .dayOfWeek;
+                .orElseThrow(IllegalStateException::new);
+    }
+
+    public String determineDayOfWeek(int day) {
+        int sequence = (this.sequence + day - 1) % 7;
+        return findDayOfWeekBySequence(sequence).dayOfWeek;
+    }
+
+    public boolean isWeekDay(int day) {
+        int sequence = (this.sequence + day - 1) % 7;
+        DayOfWeek dayOfWeek = findDayOfWeekBySequence(sequence);
+        return dayOfWeek != SAT && dayOfWeek != SUN;
     }
 }

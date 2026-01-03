@@ -13,4 +13,8 @@ public record Schedule(Month month, DayOfWeek dayOfWeek, Oncall oncall) {
     public String getDayOfWeek(int day) {
         return dayOfWeek.determineDayOfWeek(day);
     }
+
+    public boolean isWeekHoliday(int day) {
+        return dayOfWeek.isWeekDay(day) && Holiday.exsist(month, day);
+    }
 }
